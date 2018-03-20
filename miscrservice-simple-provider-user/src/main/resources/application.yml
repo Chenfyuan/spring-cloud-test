@@ -1,0 +1,35 @@
+##将服务注册到eureka server集群上,
+server:
+  port: 9099
+spring:
+  application:
+    name: microservice-provider-user
+  jpa:
+    generate-ddl: false
+    show-sql: true
+    hibernate:
+      ddl-auto: none
+  datasource:   #指定数据源
+    platform: h2 #数据库类型
+    schema: classpath:db/schema.sql
+    data: classpath:db/data.sql
+### defaultZone只需配置一个，因为多个eureka server之间数据会同步
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka
+  instance:
+    prefer-ip-address: true
+logging:
+  level:
+    root: info
+    org.hibernate: info
+info:
+  app:
+    name: @project.artifactId@
+    encoding: @project.build.sourceEncoding@
+    java:
+      source: @java.version@
+      target: @java.version@
+
+
